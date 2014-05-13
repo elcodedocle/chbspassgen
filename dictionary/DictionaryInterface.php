@@ -1,5 +1,5 @@
 <?php
-namespace synapp\info\tools\dictionary;
+namespace synapp\info\tools\passwordgenerator\dictionary;
 
 /**
  * Interface DictionaryInterface

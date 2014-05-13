@@ -1,6 +1,6 @@
 <?php
-namespace synapp\info\tools\dictionary;
-use synapp\info\tools\CryptoSecurePRNG;
+namespace synapp\info\tools\passwordgenerator\dictionary;
+use synapp\info\tools\passwordgenerator\cryptosecureprng\CryptoSecurePRNG;
 use Exception;
 use PDO;
 

@@ -1,0 +1,3 @@
+[submodule "cryptosecureprng"]
+	path = cryptosecureprng
+	url = https://github.com/elcodedocle/cryptosecureprng

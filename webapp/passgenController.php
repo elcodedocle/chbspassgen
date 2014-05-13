@@ -5,11 +5,11 @@
  * @version 0.1
  */
 ini_set("display_errors",false);
-require_once 'CryptoSecurePRNG.php';
-require_once 'DictionaryInterface.php';
-require_once 'Dictionary.php';
-require_once 'PasswordGeneratorAbstract.php';
-require_once 'PasswordGenerator.php';
+require_once '../cryptosecureprng/CryptoSecurePRNG.php';
+require_once '../dictionary/DictionaryInterface.php';
+require_once '../dictionary/Dictionary.php';
+require_once '../PasswordGeneratorAbstract.php';
+require_once '../PasswordGenerator.php';
 use synapp\info\tools\passwordgenerator\PasswordGenerator;
 
 $error = array();

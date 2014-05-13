@@ -1,8 +1,8 @@
 <?php
 namespace synapp\info\tools\passwordgenerator;
 use Exception;
-use synapp\info\tools\CryptoSecurePRNG;
-use synapp\info\tools\dictionary\Dictionary;
+use synapp\info\tools\passwordgenerator\cryptosecureprng\CryptoSecurePRNG;
+use synapp\info\tools\passwordgenerator\dictionary\Dictionary;
 
 /**
  * Class PasswordGenerator
