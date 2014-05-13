@@ -19,7 +19,7 @@ class PasswordGenerator extends PasswordGeneratorAbstract {
 
     private $defaultMinEntropies = array (64, 80, 112, 128); //min entropy (in bits) per level as an array of integers in ascending order
     private $defaultLevel = 2;
-    private $defaultDictionaryFilename = 'top10000.txt'; // 2^13 (aprox)
+    private $defaultDictionaryFilename = 'dictionary/top10000.txt'; // 2^13 (aprox)
     private $defaultSeparator = ' ';
     private $defaultMinWordSize = 4;
     private $maxSymbols = 20;
@@ -393,7 +393,7 @@ class PasswordGenerator extends PasswordGeneratorAbstract {
     public function getAlphabetSize($dictionary = null, $variationsCount = null){
         if ($dictionary === null){
             $dictionary = $this->getDictionary();
-        } else if (!is_object($dictionary) || !in_array('synapp\info\tools\dictionary\DictionaryInterface', class_implements($dictionary))){
+        } else if (!is_object($dictionary) || !in_array('synapp\info\tools\passwordgenerator\dictionary\DictionaryInterface', class_implements($dictionary))){
             throw new Exception ('$dictionary must be an object implementing DictionaryInterface');
         }
         if ($variationsCount === null) { $variationsCount = $this->getVariationsCount(); }

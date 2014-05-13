@@ -70,7 +70,7 @@ abstract class PasswordGeneratorAbstract {
      * @throws \Exception
      */
     public function setDictionary($dictionary){
-        if (is_object($dictionary) && in_array('synapp\info\tools\dictionary\DictionaryInterface', class_implements($dictionary))){
+        if (is_object($dictionary) && in_array('synapp\info\tools\passwordgenerator\dictionary\DictionaryInterface', class_implements($dictionary))){
             $this->dictionary = $dictionary;
             return true;
         } else { throw new Exception("Unable to set dictionary."); }
@@ -124,7 +124,7 @@ abstract class PasswordGeneratorAbstract {
         else if (!is_numeric($minEntropy)) { throw new Exception ('$minEntropy must be numeric'); }
         if ($dictionary===null) {
             $dictionary = $this->dictionary;
-        } else if (!is_object($dictionary) || !in_array('synapp\info\tools\dictionary\DictionaryInterface', class_implements($dictionary))){
+        } else if (!is_object($dictionary) || !in_array('synapp\info\tools\passwordgenerator\dictionary\DictionaryInterface', class_implements($dictionary))){
             throw new Exception ('$dictionary must be an object implementing DictionaryInterface.');
         }
         $symbolCount = 0;
