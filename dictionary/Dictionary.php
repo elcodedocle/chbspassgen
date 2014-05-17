@@ -27,7 +27,7 @@ class Dictionary implements DictionaryInterface {
     private $defaultMinWordSize = 4;
     private $defaultUnique = false; // be aware unique = true invalidates countWordsOn(password) * log2(countWordsOn(Dictionary)) as a valid measure of the entropy in bits!
     // file input
-    private $defaultFilename = 'dictionary.txt';
+    private $defaultFilename;
     private $defaultSplitPattern = '/[\s,]+/';
     // pdo dbh input
     private $defaultDbh;
@@ -141,10 +141,17 @@ class Dictionary implements DictionaryInterface {
         if ($add === null) { $add = $this->defaultAdd; }
         if ($minWordSize === null) { $minWordSize = $this->defaultMinWordSize; }
         if (
-            !is_bool($add) ||
-            !is_int($minWordSize)||$minWordSize<=0 ||
+            !is_bool($add)
+        ) { throw new Exception('Invalid input parameters: $add must be boolean'); }
+        if (
+            !is_int($minWordSize)
+        ) { throw new Exception('Invalid input parameters: $minWordSize must be an integer'); }
+        if (
+            $minWordSize<=0
+        ) { throw new Exception('Invalid input parameters: $minWordSize must be > 0'); }
+        if (
             !is_array($newWords)
-        ) { throw new Exception('Invalid input parameters.'); }
+        ) { throw new Exception('Invalid input parameters: $newWords must be an array'); }
         foreach ($newWords as $index=>$word){
             if (strlen($newWords[$index]=trim($newWords[$index]))<$minWordSize) { unset($newWords[$index]); }
         }
@@ -153,6 +160,7 @@ class Dictionary implements DictionaryInterface {
         } else {
             $this->words = array_unique ($newWords);
         }
+        $this->setWordCount();
         return true;
     }
 
@@ -172,14 +180,29 @@ class Dictionary implements DictionaryInterface {
         if ($add === null) { $add = $this->defaultAdd; }
         if ($minWordSize === null) { $minWordSize = $this->defaultMinWordSize; }
         if (
-            !is_string($filename) ||
-            !file_exists($filename) ||
-            !is_string($splitPattern) ||
-            !is_bool($add) ||
-            !is_int($minWordSize)||$minWordSize<=0 ||
-            (($filestring = file_get_contents($filename)) === false) ||
+            !is_string($filename)
+        ) { throw new Exception('Invalid input parameters: $filename is not a string'); }
+        if (
+            !file_exists($filename)
+        ) { throw new Exception('Invalid input parameters: '.$filename.' does not exist'); }
+        if (
+            !is_string($splitPattern)
+        ) { throw new Exception('Invalid input parameters: $splitPattern is not a string'); }
+        if (
+            !is_bool($add)
+        ) { throw new Exception('Invalid input parameters: $add is not boolean'); }
+        if (
+            !is_int($minWordSize)
+        ) { throw new Exception('Invalid input parameters: $minWordSize is not an int'); }
+        if (
+            $minWordSize<=0
+        ) { throw new Exception('Invalid input parameters: $minWordSize is not > 0'); }
+        if (
+            (($filestring = file_get_contents($filename)) === false)
+        ) { throw new Exception('Cannot read input file '.$filename); }
+        if (
             ($words = preg_split($splitPattern, $filestring)) === false
-        ) { throw new Exception('Invalid input parameters.'); }
+        ) { throw new Exception('Invalid input parameters Cannot split words in '.$filename.' using pattern '.$splitPattern); }
         // this is readWordsFromArray repeated for efficiency (passing $words by reference should match the efficiency but we don't want to modify the array there)
         foreach ($words as $index=>$word){
             if (strlen($words[$index]=trim($word))<$minWordSize) { unset($words[$index]); }
@@ -189,6 +212,7 @@ class Dictionary implements DictionaryInterface {
         } else {
             $this->words = array_unique ($words);
         }
+        $this->setWordCount();
         return true;
     }
 
@@ -243,7 +267,7 @@ class Dictionary implements DictionaryInterface {
         } else {
             $this->words = array_unique ($words);
         }
-
+        $this->setWordCount();
         return true;
     }
 
@@ -293,10 +317,11 @@ class Dictionary implements DictionaryInterface {
                 break;
             default: throw new Exception ('invalid $format');
         }
-        $this->setWordCount();
         return true;
     }
     public function __construct($input = null, $minWordSize = null, $format = null, $params = array(), $prng = null){
+
+        $this->defaultFilename = realpath(dirname(__FILE__)).'/top10000.txt';
 
         if ($minWordSize===null) { $minWordSize = $this->defaultMinWordSize; } else { $this->defaultMinWordSize = $minWordSize; }
         if (!is_int($minWordSize)||$minWordSize<=0) { throw new Exception ('$minWordSize must be a positive (>0) integer'); }

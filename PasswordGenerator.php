@@ -19,7 +19,7 @@ class PasswordGenerator extends PasswordGeneratorAbstract {
 
     private $defaultMinEntropies = array (64, 80, 112, 128); //min entropy (in bits) per level as an array of integers in ascending order
     private $defaultLevel = 2;
-    private $defaultDictionaryFilename = 'dictionary/top10000.txt'; // 2^13 (aprox)
+    private $defaultDictionaryFilename = null; // 2^13 (aprox)
     private $defaultSeparator = ' ';
     private $defaultMinWordSize = 4;
     private $maxSymbols = 20;
