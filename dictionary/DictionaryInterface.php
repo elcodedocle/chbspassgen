@@ -8,7 +8,7 @@ namespace synapp\info\tools\passwordgenerator\dictionary;
  *
  * @copyright Gael Abadin (elcodedocle) 2014
  * @license MIT Expat http://en.wikipedia.org/wiki/Expat_License
- * @version 0.1
+ * @version 0.1.0-beta
  * 
  */
 interface DictionaryInterface {

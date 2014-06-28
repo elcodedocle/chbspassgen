@@ -2,7 +2,7 @@
 /**
  * @copyright Gael Abadin (elcodedocle) 2014
  * @license MIT Expat http://en.wikipedia.org/wiki/Expat_License
- * @version 0.1
+ * @version 0.1.0-beta
  */
 ini_set("display_errors",false);
 require_once '../cryptosecureprng/CryptoSecurePRNG.php';
