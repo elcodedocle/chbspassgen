@@ -1,0 +1,11 @@
+{
+    "name": "elcodedocle/chbspassgen",
+    "type": "class",
+    "description": "UUID v3, v4, v5 generator class",
+    "keywords": ["password generator", "high entropy", "secure password", "password security"],
+    "homepage": "https://github.com/elcodedocle/chbspassgen",
+    "license": "MIT Expat",
+    "require": {
+        "php": ">=5.3.0"
+    }
+}
