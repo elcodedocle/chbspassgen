@@ -182,25 +182,6 @@ class PasswordGenerator extends PasswordGeneratorAbstract {
     }
 
     /**
-     * @param $defaultMinEntropies
-     * @throws \Exception
-     * @return bool
-     */
-    public function setDefaultMinEntropies($defaultMinEntropies)
-    {
-        if (!is_array($defaultMinEntropies)||!isset($defaultMinEntropies[0])||!is_int($defaultMinEntropies[0])||$defaultMinEntropies[0]<=0) {
-            throw new Exception ('$defaultMinEntropies must be an ascending ordered array of ints > 0');
-        }
-        for ($i = 1; $i<count($defaultMinEntropies); $i++){
-            if (!isset($defaultMinEntropies[$i])||!is_int($defaultMinEntropies[$i])||$defaultMinEntropies[$i]<=$defaultMinEntropies[$i-1]){
-                throw new Exception ('$defaultMinEntropies must be an ascending ordered array of ints');
-            }
-        }
-        $this->defaultMinEntropies = $defaultMinEntropies;
-        return true;
-    }
-
-    /**
      * @param $level
      * @throws \Exception
      * @return bool
@@ -341,17 +322,24 @@ class PasswordGenerator extends PasswordGeneratorAbstract {
 
     /**
      * @param $minEntropies
-     * @return bool
+     * @param bool $default
      * @throws \Exception
+     * @return bool
      */
-    public function setMinEntropies($minEntropies){
-        if (!is_array($minEntropies)||!isset($minEntropies[0])||!is_int($minEntropies[0])||$minEntropies[0]<=0)  throw new Exception ('$minEntropies must be an increasing ordered array of ints > 0');
+    public function setMinEntropies($minEntropies, $default = false){
+        if (!is_array($minEntropies)||!isset($minEntropies[0])||!is_int($minEntropies[0])||$minEntropies[0]<=0){
+            throw new Exception ('$minEntropies must be an ascending ordered array of ints > 0');
+        }
         for ($i = 1; $i<count($minEntropies); $i++){
             if (!isset($minEntropies[$i])||!is_int($minEntropies[$i])||$minEntropies[$i]<=$minEntropies[$i-1]){
-                throw new Exception ('$minEntropies must be an increasing ordered array of ints > 0');
+                throw new Exception ('$minEntropies must be an ascending ordered array of ints > 0');
             }
         }
-        $this->minEntropies = $minEntropies;
+        if ($default){
+            $this->defaultMinEntropies = $minEntropies;
+        } else {
+            $this->minEntropies = $minEntropies;
+        }
         return true;
     }
 
