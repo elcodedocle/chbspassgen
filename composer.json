@@ -1,7 +1,7 @@
 {
     "name": "elcodedocle/chbspassgen",
     "type": "class",
-    "description": "UUID v3, v4, v5 generator class",
+    "description": "Safe and easy to remember high entropy password generator. Dictionary based, yet brute force resistant.",
     "keywords": ["password generator", "high entropy", "secure password", "password security"],
     "homepage": "https://github.com/elcodedocle/chbspassgen",
     "license": "MIT Expat",
