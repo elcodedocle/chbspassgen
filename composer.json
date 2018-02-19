@@ -4,8 +4,15 @@
     "description": "Safe and easy to remember high entropy password generator. Dictionary based, yet brute force resistant.",
     "keywords": ["password generator", "high entropy", "secure password", "password security"],
     "homepage": "https://github.com/elcodedocle/chbspassgen",
-    "license": "MIT Expat",
+    "license": "MIT",
+    "autoload": {
+        "classmap": [
+            "src"
+        ]
+    },
     "require": {
-        "php": ">=5.3.0"
+        "php": ">=5.3.0",
+        "elcodedocle/cryptosecureprng": "0.2.2",
+        "ext-json": "*"
     }
 }

@@ -1,0 +1,22 @@
+{
+    "name": "elcodedocle/chbspassgendemowebapp",
+    "type": "webapp",
+    "description": "CHBS pass gen demo web app.",
+    "keywords": ["password generator", "high entropy", "secure password", "password security"],
+    "homepage": "https://github.com/elcodedocle/chbspassgen",
+    "license": "MIT",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../",
+            "options" : {
+                "versions" :
+                { "elcodedocle/chbspassgen" : "0.1.1@dev" }
+            }
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "elcodedocle/chbspassgen": "0.1.1@dev"
+    }
+}
